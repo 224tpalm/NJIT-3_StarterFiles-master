@@ -43,3 +43,8 @@ const vue_app = Vue.createApp({
 })
 
 vue_app.mount("#vue_app")
+
+title = IMDB + Tylers Top Eight Movies;
+owner = Tyler;
+github = https://github.com/224tpalm/NJIT-3_StarterFiles-master;
+
