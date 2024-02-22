@@ -21,7 +21,7 @@
 */
 
 
-const vue_app = Vue.createApp({
+const vue_app = vue.createApp({
       // This automatically imports your movies.json file and puts it into
       //   the variable: movies
       created () {
@@ -35,17 +35,15 @@ const vue_app = Vue.createApp({
             movies: [], 
             
             /* ADD ADDITIONAL VARIABLES FOR STEP 3 HERE */
-            title: "IMDB + Tyler's Top 8 Movies",
-            owner: "Tyler",
+            Title: "IMDB + Tyler's Top 8 Movies",
+            owner: " Tyler",
             github: "https://github.com/224tpalm/NJIT-3_StarterFiles-master"
       }
     },
       methods: {
             /* ADD FUNCTIONS/METHODS FOR STEP 7 HERE */
-            getMonthText: function(dataArray){
-                  var nameOfMonth;
-                  var releaseDate;
-                  
+            getMonthText(dateArray)
+                  {                  
                   let monthName = "";
                   switch (dateArray[1]) {
                         case 1:
@@ -89,39 +87,23 @@ const vue_app = Vue.createApp({
                   }
                   return monthName + " " + dateArray[2] + ", " + dateArray[0];
             }, 
+            
+            posterClick(index)
+            {
+                  if(this.movies[index].posterindex < this.movies[index].posters.length -1)
+                  {
+                        this.movies[index].posterindex++;
+                  }
+                  else {
+                        this.movies[index].posterIndex = 0;
+                  }
+            },
+            
+            textTime(minutes)
+            {
+                  return Math.trunc(minutes/60) + "h " + (minutes%60) + "m";
             }
       }
-)
-
-
-like: function(index){
-      this.movies[index].likes += 1;
-},
-
-dislike: function(index){
-      this.movies[index].dislikes -= 1;
-},
-
-posterClick: function(index){
-      var currentPosterIndex = this.movies[index].posterindex;
-      var currentPoster = this.movies[index].posters.length - 1;
-
-      if(currentPosterIndex < currentPoster){
-            this.movies[index].posterindex += 1;
-      }
-      else {
-            this.movies[index].posterindex = 0;
-      }
-},
-
-timeText: function(minutes){
-      var hours = Math.floor(minutes/60);
-      var mins = minutes%60;
-      return (hours + "h " + mins + "m"):
-
-}
-
+      })
 
 vue_app.mount("#vue_app")
-
-
