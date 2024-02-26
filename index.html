@@ -25,7 +25,7 @@
 
 	      <div class="container">
 	    
-				<h1 id="app_title">{{Title}}</h1>
+				<h1 id="app_title">{{ Title }}</h1>
 	  </div>
 
 	    </div>
@@ -37,19 +37,18 @@
 			  <div class="col-md-6" v-for="(movie, index) in movies">         
 				   <!-- v-for loop to repeatedly make columns within this bootstrap row -->
 				  <div class="thumbnail">
-													<!-- ^ allows the index to be used later in the code -->
-						  <img class="poster img-fluid" :src="movie.posters[movie.posterindex]" @click="posterClick(index)">
-						  <div class="imageInfo">Poster {{ movie.posterindex + 1 }} of {{ movie.posters.length }}</div>
+					<img v-on:click= "posterClick(index)" class="poster" :src="movies[index].posters[movies[index].posterindex]"/>
+						  <div class="imageInfo">Poster {{ movies[index].posterindex + 1 }} of {{ movies[index].posters.length }}</div>
   
-						  <p class="title">{{ movie.title }} ({{ movie.country }})</p>
-						  <p class="score"><i class="bi bi-star" aria-hidden="true"></i> {{ movie.iscore }}</p>
-						  <p class="runtime">Runtime: {{ timeText(movie.runtime) }}</p>
-						  <p class="released">Released: {{ getMonthText(movie.released) }} | Rated: {{ movie.rating }}</p>
-						  <p class="websites">Websites: <a :href="movie.imdb" target="_blank"> IMDB </a> | <a :href="movie.website" target="_blank">Official</a></p><br>
+						  <p class="title">{{ movies[index].title }} ({{ movies[index].country }})</p>
+						  <p class="score"><i class="bi bi-star" aria-hidden="true"></i> {{ movies[index].iscore }}</p>
+						  <p class="runtime">Runtime: {{ movies[index].runtime }}</p>
+						  <p class="released">Released: {{ getMonthText(movies[index].released) }} | Rated: {{ movies[index].rating }}</p>
+						  <p class="websites">Websites: <a v-bind:href="movies[index].imdb"> IMDB </a> | <a v-bind:href="movies[index].website">Official</a></p><br>
   
 						  <div class="social">
-							<p class="likes" @click="like(index)"><i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> {{ movie.likes }}</p>
-							<p class="dislikes" @click="dislike(index)"><i class="bi bi-hand-thumbs-down"></i>{{ movie.dislikes }}</p>
+							<p class="likes" @click="movies[index].likes++"><i class="bi bi-hand-thumbs-up" aria-hidden="true"></i> {{ movies[index].likes }}</p>
+							<p class="dislikes" @click="movies[index].dislikes++"><i class="bi bi-hand-thumbs-down"></i>{{ movies[index].dislikes }}</p>
 						  </div>
 				  </div>
 			  </div>
@@ -59,8 +58,8 @@
 
 		  <div class="footer">
 			<div class="container"> <!-- Footer for link to github repository -->
-			  <a :href="github" id="github" target="_blank" class="btn btn-lg btn-warning">
-				  <i class="bi bi-github me-2"> {{ owner }}</i>
+			  <a id="github" class="btn btn-lg btn-warning" v-bind:href="url" target="_blank">
+				  <i class="bi bi-github me-2"></i> {{ owner }}
 				</a>
 			</div>
 		  </div>
